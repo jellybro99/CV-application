@@ -4,6 +4,7 @@ import GeneralInput from './components/GeneralInput';
 import EducationInput from './components/EducationInput';
 import ExperienceInput from './components/ExperienceInput';
 import RenderResume from './components/RenderResume';
+import Button from './components/Button';
 
 const defaultResume = {
   general: {
@@ -53,12 +54,17 @@ function App() {
   const inputStyling = "inputs w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow"
   const outputStyling = "flex-grow border-2 p-8 rounded border-slate-400 bg-white shadow";
 
+  const edit = (e) => {
+    //load from resume
+  }
+
   return (
     <div className={pageStyling} > {/* page div */}
       <div className={inputStyling}> {/* input div */}
         <GeneralInput resume={resume} setResume={setResume}/>
         <EducationInput resume={resume} setResume={setResume}/>
         <ExperienceInput resume={resume} setResume={setResume}/>
+        <div className='mx-0.5'><Button text="Edit" onSubmit={edit} styling="w-full mt-1.5"/></div>
       </div>
       <div className={outputStyling}> {/* output div */}
         <RenderResume resume={resume}/>
