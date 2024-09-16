@@ -49,7 +49,7 @@ function App() {
     localStorage.setItem("resume", JSON.stringify(defaultResume)) 
   }
   const [resume, setResume] = useState(JSON.parse(localStorage.getItem("resume")));
-  const pageStyling = "flex flex-col md:flex-row gap-8 p-8 bg-slate-200";
+  const pageStyling = "flex flex-col md:flex-row gap-8 p-8 bg-slate-200 min-h-dvh";
   const inputStyling = "inputs w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow"
   const outputStyling = "flex-grow border-2 p-8 rounded border-slate-400 bg-white shadow";
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
+import Collapsable from "./Collapsable";
 
 function ExperienceInput({ resume, setResume }) {
   //read from resume to find how many states
@@ -73,13 +74,15 @@ function ExperienceInput({ resume, setResume }) {
   }
 
   return (
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2"> {/* general info form */}
-        {inputs.map((input) => (
-          <Input key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
-        ))}
-        <Button text="Add Experience" type="button" onClick={addExperience}/>
-        <Button text="Submit" type="submit"/>
-      </form>
+      <Collapsable sectionTitle="Experience">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2"> {/* general info form */}
+          {inputs.map((input) => (
+            <Input key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
+          ))}
+          <Button text="Add Experience" type="button" onClick={addExperience}/>
+          <Button text="Submit" type="submit"/>
+        </form>
+      </Collapsable>
   )
 }
 
