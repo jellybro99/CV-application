@@ -4,16 +4,21 @@ import Button from "./Button";
 import Collapsable from "./Collapsable";
 
 function GeneralInput({ resume, setResume }) {
-  //const [values, setValues] = useState(resume.general)
-
+//(resume == "") ? "" : resume.general.name
   const [values, setValues] = useState({
-    name:(resume == "") ? "" : resume.general.name,
-    email:(resume == "") ? "" : resume.general.email,
-    phone:(resume == "") ? "" : resume.general.phone
+    name: "",
+    email: "",
+    phone: ""
   });
 
-  //const [display, setDisplay] = useState("");
-  //should setValues(resume.general) when edit section is called
+  if(resume != "" && values.name == ""){
+    setValues({
+      name: resume.general.name,
+      email: resume.general.email,
+      phone: resume.general.phone
+    })
+  }
+  //error is in here: values state isn't updating when edit is pressed, but resume is being updated
 
   const inputs = [
     {
@@ -39,14 +44,14 @@ function GeneralInput({ resume, setResume }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);
-    //setResume({...resume, [resume.general]: e})
+    //setResume({...resume, [resume.general]: e});
   }
 
   const onChange = (e) => {
     setValues({...values, [e.target.name]: e.target.value});
   }
 
-    const formStyling = "flex flex-col gap-2 transition-all";
+    const formStyling = "flex flex-col gap-2";
 
   //SHOULD SPECIFY GENERAL INFO BEFORE AND HAVE FUNCTIONALITY TO MINIMIZE
   return (

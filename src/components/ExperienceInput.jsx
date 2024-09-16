@@ -17,16 +17,6 @@ function ExperienceInput({ resume, setResume }) {
     responsibilites:""
   });
 
-  /*
-  const [values, setValues] = useState([{
-    company:"",
-    position:"",
-    startDate:"",
-    endDate:"",
-    responsibilites:""
-    }])
-  */
-
   const inputs = [
     {
       id:1,

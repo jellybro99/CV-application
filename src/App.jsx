@@ -51,20 +51,21 @@ function App() {
   }
   const [resume, setResume] = useState(JSON.parse(localStorage.getItem("resume")));
   const pageStyling = "flex flex-col md:flex-row gap-8 p-8 bg-slate-200 min-h-dvh";
-  const inputStyling = "inputs w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow"
+  const inputStyling = "inputs w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow";
   const outputStyling = "flex-grow border-2 p-8 rounded border-slate-400 bg-white shadow";
+  const [input, setInput] = useState("");
 
-  const edit = (e) => {
-    //load from resume??
+  const editInput = () => {
+    setInput(JSON.parse(JSON.stringify(resume)));    
   }
-
+  // USE NEW OBJECTS AND ALL THAT
   return (
     <div className={pageStyling} > {/* page div */}
       <div className={inputStyling}> {/* input div */}
-        <GeneralInput resume={""} setResume={setResume}/>
-        <EducationInput resume={""} setResume={setResume}/>
-        <ExperienceInput resume={""} setResume={setResume}/>
-        <div className='mx-0.5'><Button text="Edit" onSubmit={edit} styling="w-full mt-1.5"/></div>
+        <GeneralInput resume={input} setResume={setResume}/>
+        <EducationInput resume={input} setResume={setResume}/>
+        <ExperienceInput resume={input} setResume={setResume}/>
+        <div className='mx-1.5' onClick={editInput}><Button text="Edit" styling="w-full mt-1"/></div>
       </div>
       <div className={outputStyling}> {/* output div */}
         <RenderResume resume={resume}/>
