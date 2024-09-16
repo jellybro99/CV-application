@@ -10,10 +10,10 @@ function Collapsable(props) {
     }
 
     return (
-        <>
-            <h1 className="hover:cursor-pointer" onClick={toggleDisplay}>{sectionTitle}</h1>
+        <div>
+            <h1 className="hover:cursor-pointer hover:border-blue-400 hover:border-2" onClick={toggleDisplay}>{(visible ? "< " : "> ") + sectionTitle}</h1>
             {visible ? children : null}
-        </>
+        </div>
     )
 }
 

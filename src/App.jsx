@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-
 import GeneralInput from './components/GeneralInput';
 import EducationInput from './components/EducationInput';
 import ExperienceInput from './components/ExperienceInput';
@@ -49,15 +48,18 @@ function App() {
     localStorage.setItem("resume", JSON.stringify(defaultResume)) 
   }
   const [resume, setResume] = useState(JSON.parse(localStorage.getItem("resume")));
+  const pageStyling = "flex flex-col md:flex-row gap-8 p-8 bg-slate-200";
+  const inputStyling = "inputs w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow"
+  const outputStyling = "flex-grow border-2 p-8 rounded border-slate-400 bg-white shadow";
 
   return (
-    <div className='flex flex-col md:flex-row gap-8 p-8 bg-slate-200' > {/* page div */}
-      <div className='inputs w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow'> {/* input div FIX WIDTH*/}
+    <div className={pageStyling} > {/* page div */}
+      <div className={inputStyling}> {/* input div */}
         <GeneralInput resume={resume} setResume={setResume}/>
         <EducationInput resume={resume} setResume={setResume}/>
         <ExperienceInput resume={resume} setResume={setResume}/>
       </div>
-      <div className='flex-grow border-2 p-8 rounded border-slate-400 bg-white shadow'> {/* output div */}
+      <div className={outputStyling}> {/* output div */}
         <RenderResume resume={resume}/>
       </div>
     </div>
