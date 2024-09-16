@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
+import Collapsable from "./Collapsable";
 
 function GeneralInput({ resume, setResume }) {
   //const [values, setValues] = useState(resume.general)
@@ -10,6 +11,8 @@ function GeneralInput({ resume, setResume }) {
     email:"",
     phone:""
   });
+
+  //const [display, setDisplay] = useState("");
   //should setValues(resume.general) when edit section is called
 
   const inputs = [
@@ -43,14 +46,18 @@ function GeneralInput({ resume, setResume }) {
     setValues({...values, [e.target.name]: e.target.value});
   }
 
+  const formStyling = "flex flex-col gap-2";
+
   //SHOULD SPECIFY GENERAL INFO BEFORE AND HAVE FUNCTIONALITY TO MINIMIZE
   return (
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2"> {/* general info form */}
-        {inputs.map((input) => (
-          <Input key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
-        ))}
-        <Button text="Submit" type="submit"/>
-      </form>
+      <Collapsable sectionTitle="General Info">
+        <form onSubmit={handleSubmit} className={formStyling}> {/* general info form */}
+          {inputs.map((input) => (
+            <Input key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
+          ))}
+          <Button text="Submit" type="submit"/>
+        </form>
+      </Collapsable>
   )
 }
 
