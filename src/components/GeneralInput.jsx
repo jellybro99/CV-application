@@ -46,7 +46,7 @@ function GeneralInput({ resume, setResume }) {
     setValues({...values, [e.target.name]: e.target.value});
   }
 
-  const formStyling = "flex flex-col gap-2";
+  const formStyling = "flex flex-col gap-2 transition-all";
 
   //SHOULD SPECIFY GENERAL INFO BEFORE AND HAVE FUNCTIONALITY TO MINIMIZE
   return (

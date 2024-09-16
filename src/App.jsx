@@ -15,6 +15,7 @@ const defaultResume = {
     schools: [
       {
         name: "East Blue Clown Institute",
+        location: "The Grand Line",
         startDate: "Aug 1998",
         endDate: "May 2002",
         degree: "Juggling",
