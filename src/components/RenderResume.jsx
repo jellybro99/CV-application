@@ -55,11 +55,11 @@ function RenderResume({ resume }) {
     //need to make keys for each school
 
     return (
-        <div>
+        <>
             <GeneralInfo resume={resume}/>
             <EducationInfo resume={resume}/>
             <ExperienceInfo resume={resume}/>
-        </div>
+        </>
     )
 }
 

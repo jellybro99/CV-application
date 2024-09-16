@@ -7,9 +7,9 @@ function GeneralInput({ resume, setResume }) {
   //const [values, setValues] = useState(resume.general)
 
   const [values, setValues] = useState({
-    name:"",
-    email:"",
-    phone:""
+    name:(resume == "") ? "" : resume.general.name,
+    email:(resume == "") ? "" : resume.general.email,
+    phone:(resume == "") ? "" : resume.general.phone
   });
 
   //const [display, setDisplay] = useState("");
