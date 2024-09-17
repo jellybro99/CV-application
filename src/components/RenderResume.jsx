@@ -21,7 +21,7 @@ function EducationInfo({ resume }){
                 return (
                     <>
                         <div className="flex flex-row justify-between">
-                            <span>{school.name} | LOCATION</span>
+                            <span>{school.name} | <span className="italic">{school.location}</span></span>
                             <span>{school.startDate} - {school.endDate}</span>
                         </div>
                         <div className="list-item ml-8">

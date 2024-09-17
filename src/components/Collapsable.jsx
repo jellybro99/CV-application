@@ -6,7 +6,7 @@ function Collapsable(props) {
     const [hover, setHover] = useState(false);
 
     const toggleDisplay = (e) => {
-        setVisible(visible ? false : true);
+        setVisible(!visible);
     }
 
     return (

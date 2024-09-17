@@ -45,7 +45,7 @@ const defaultResume = {
 };
 
 function App() {
-  //localStorage.removeItem("resume")
+  localStorage.removeItem("resume")
   if(localStorage.getItem("resume") == null) {
     localStorage.setItem("resume", JSON.stringify(defaultResume)) 
   }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Collapsable from "./Collapsable";
@@ -11,13 +11,17 @@ function GeneralInput({ resume, setResume }) {
     phone: ""
   });
 
-  if(resume != "" && values.name == ""){
-    setValues({
-      name: resume.general.name,
-      email: resume.general.email,
-      phone: resume.general.phone
-    })
-  }
+  useEffect(() => {
+    if(resume != ""){
+      setValues({
+        name: resume.general.name,
+        email: resume.general.email,
+        phone: resume.general.phone
+      });
+    }
+  }, [resume])
+  
+
   //error is in here: values state isn't updating when edit is pressed, but resume is being updated
 
   const inputs = [
@@ -43,8 +47,8 @@ function GeneralInput({ resume, setResume }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
-    //setResume({...resume, [resume.general]: e});
+    //console.log(values);
+    setResume({...resume, [resume.general]: values});
   }
 
   const onChange = (e) => {
@@ -53,7 +57,6 @@ function GeneralInput({ resume, setResume }) {
 
     const formStyling = "flex flex-col gap-2";
 
-  //SHOULD SPECIFY GENERAL INFO BEFORE AND HAVE FUNCTIONALITY TO MINIMIZE
   return (
       <Collapsable sectionTitle="General Info">
         <form onSubmit={handleSubmit} className={formStyling}> {/* general info form */}
