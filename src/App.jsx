@@ -17,8 +17,8 @@ const defaultResume = {
       {
         name: "East Blue Clown Institute",
         location: "The Grand Line",
-        startDate: "Aug 1998",
-        endDate: "May 2002",
+        startDate: "1998-08-22",
+        endDate: "2002-05-08",
         degree: "Juggling",
         gpa: "4.0"
       }
@@ -28,16 +28,16 @@ const defaultResume = {
     jobs: [
       {
         company: "Buggy Pirates",
-        position: "Captin",
-        startDate: "June 2004",
+        position: "Captain",
+        startDate: "2004-08-22",
         endDate: "",
         responsibilites:""
       },
       {
         company: "World Government",
         position: "Warlord",
-        startDate: "Aug 2022",
-        endDate: "Dec 2022",
+        startDate: "2022-08-12",
+        endDate: "2022-12-18",
         responsibilites:""
       }
     ]

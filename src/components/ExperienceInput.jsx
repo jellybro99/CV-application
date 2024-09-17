@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Collapsable from "./Collapsable";
@@ -16,6 +16,18 @@ function ExperienceInput({ resume, setResume }) {
     endDate:"",
     responsibilites:""
   });
+
+  useEffect(() => {
+    if(resume != ""){
+      setValues({
+        company: resume.experience.jobs[0].company,
+        position: resume.experience.jobs[0].position,
+        startDate: resume.experience.jobs[0].startDate,
+        endDate: resume.experience.jobs[0].endDate,
+        responsibilites: resume.experience.jobs[0].responsibilites
+      });
+    }
+  }, [resume])
 
   const inputs = [
     {

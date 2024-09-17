@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Collapsable from "./Collapsable";
@@ -7,16 +7,27 @@ function ExperienceInput({ resume, setResume }) {
   //read from resume to find how many states
   //figure out how best to store and remove schools
   const [values, setValues] = useState({
-    school:"",
+    name:"",
     degree:"",
     startDate:"",
     endDate:"",
   });
 
+  useEffect(() => {
+    if(resume != ""){
+      setValues({
+        name: resume.education.schools[0].name,
+        degree: resume.education.schools[0].degree,
+        startDate: resume.education.schools[0].startDate,
+        endDate: resume.education.schools[0].endDate
+      });
+    }
+  }, [resume])
+
   const inputs = [
     {
       id:1,
-      name:"school",
+      name:"name",
       type:"text",
       label:"School"
     },
