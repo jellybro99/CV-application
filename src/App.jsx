@@ -58,11 +58,21 @@ function App() {
   const editInput = () => {
     setInput(JSON.parse(JSON.stringify(resume)));    
   }
+
+  const handleSubmitSubmit = (values, section) => {
+    let newResume = JSON.parse(JSON.stringify(resume));
+    newResume[section] = values;
+    setResume(newResume);
+    //setResume()
+
+  }
+
+
   // USE NEW OBJECTS AND ALL THAT
   return (
     <div className={pageStyling} > {/* page div */}
       <div className={inputStyling}> {/* input div */}
-        <GeneralInput resume={input} setResume={setResume}/>
+        <GeneralInput resume={input} handleSubmitSubmit={handleSubmitSubmit}/>
         <EducationInput resume={input} setResume={setResume}/>
         <ExperienceInput resume={input} setResume={setResume}/>
         <div className='mx-1.5' onClick={editInput}><Button text="Edit" styling="w-full mt-1"/></div>

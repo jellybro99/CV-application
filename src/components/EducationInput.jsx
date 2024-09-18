@@ -6,12 +6,34 @@ import Collapsable from "./Collapsable";
 function ExperienceInput({ resume, setResume }) {
   //read from resume to find how many states
   //figure out how best to store and remove schools
+
+  //initially only one slot for experience.
+  //change state to array with one slot
+  //adding experience will add to array and rerender
+  //choosing edit will replace whatever is currently rendered with the stored resume
+
   const [values, setValues] = useState({
     name:"",
     degree:"",
     startDate:"",
     endDate:"",
   });
+
+  /*
+  const [value, setValues] = useState([{
+    name:"",
+    degree:"",
+    startDate:"",
+    endDate:"",
+  },
+  {
+    name:"",
+    degree:"",
+    startDate:"",
+    endDate:"",
+  }])
+  */
+
 
   useEffect(() => {
     if(resume != ""){

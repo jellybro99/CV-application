@@ -1,3 +1,7 @@
+const dateOptions = {
+    month: "short",
+    year: "numeric"
+}
 
 function GeneralInfo({ resume }) {
 
@@ -13,6 +17,7 @@ function GeneralInfo({ resume }) {
 }
 
 function EducationInfo({ resume }){
+    //render dates as english
     return (
         <>
             <h2 className="text-lg font-semibold">Education</h2>
