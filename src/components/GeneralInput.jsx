@@ -3,7 +3,7 @@ import Input from "./Input";
 import Button from "./Button";
 import Collapsable from "./Collapsable";
 
-function GeneralInput({ resume, handleSubmitSubmit }) {
+function GeneralInput({ resume, handleHandleSubmit }) {
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -55,7 +55,7 @@ function GeneralInput({ resume, handleSubmitSubmit }) {
       email: "",
       phone: ""
     });
-    handleSubmitSubmit(values, "general")
+    handleHandleSubmit(values, "general")
   }
 
   const onChange = (e) => {

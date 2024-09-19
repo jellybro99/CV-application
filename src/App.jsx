@@ -15,6 +15,7 @@ const defaultResume = {
   education: {
     schools: [
       {
+        id: 1,
         name: "East Blue Clown Institute",
         location: "The Grand Line",
         startDate: "1998-08-22",
@@ -27,6 +28,7 @@ const defaultResume = {
   experience: {
     jobs: [
       {
+        id: 1,
         company: "Buggy Pirates",
         position: "Captain",
         startDate: "2004-08-22",
@@ -34,6 +36,7 @@ const defaultResume = {
         responsibilites:""
       },
       {
+        id: 2,
         company: "World Government",
         position: "Warlord",
         startDate: "2022-08-12",
@@ -45,36 +48,34 @@ const defaultResume = {
 };
 
 function App() {
-  localStorage.removeItem("resume")
+  localStorage.removeItem("resume");
   if(localStorage.getItem("resume") == null) {
-    localStorage.setItem("resume", JSON.stringify(defaultResume)) 
+    localStorage.setItem("resume", JSON.stringify(defaultResume));
   }
-  const [resume, setResume] = useState(JSON.parse(localStorage.getItem("resume")));
+  //const [resume, setResume] = useState(JSON.parse(localStorage.getItem("resume")));
+  const [resume, setResume] = useState(defaultResume);
   const pageStyling = "flex flex-col md:flex-row gap-8 p-8 bg-slate-200 min-h-dvh";
   const inputStyling = "inputs w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow";
   const outputStyling = "flex-grow border-2 p-8 rounded border-slate-400 bg-white shadow";
   const [input, setInput] = useState("");
 
   const editInput = () => {
-    setInput(JSON.parse(JSON.stringify(resume)));    
+    setInput(JSON.parse(JSON.stringify(resume)));    //apparently this doesn't work for Dates
   }
 
-  const handleSubmitSubmit = (values, section) => {
+  const handleHandleSubmit = (values, section) => {
     let newResume = JSON.parse(JSON.stringify(resume));
     newResume[section] = values;
     setResume(newResume);
-    //setResume()
-
+    //ERROR BECAUSE SETTING EXPERIENCE TO ARRAY NOT JOBS.
   }
 
-
-  // USE NEW OBJECTS AND ALL THAT
   return (
     <div className={pageStyling} > {/* page div */}
       <div className={inputStyling}> {/* input div */}
-        <GeneralInput resume={input} handleSubmitSubmit={handleSubmitSubmit}/>
-        <EducationInput resume={input} setResume={setResume}/>
-        <ExperienceInput resume={input} setResume={setResume}/>
+        <GeneralInput resume={input} handleHandleSubmit={handleHandleSubmit}/>
+        <EducationInput resume={input} handleHandleSubmit={handleHandleSubmit}/>
+        <ExperienceInput resume={input} handleHandleSubmit={handleHandleSubmit}/>
         <div className='mx-1.5' onClick={editInput}><Button text="Edit" styling="w-full mt-1"/></div>
       </div>
       <div className={outputStyling}> {/* output div */}
