@@ -3,46 +3,32 @@ import Input from "./Input";
 import Button from "./Button";
 import Collapsable from "./Collapsable";
 
-function ExperienceInput({ resume, setResume }) {
-  //read from resume to find how many states
-  //figure out how best to store and remove schools
-
-  //initially only one slot for experience.
-  //change state to array with one slot
-  //adding experience will add to array and rerender
-  //choosing edit will replace whatever is currently rendered with the stored resume
-
-  const [values, setValues] = useState({
+function EducationInput({ resume, handleHandleSubmit }) {
+  const [values, setValues] = useState([{
+    id: 1,
     name:"",
+    location:"",
     degree:"",
+    gpa: "",
     startDate:"",
     endDate:"",
-  });
-
-  /*
-  const [value, setValues] = useState([{
-    name:"",
-    degree:"",
-    startDate:"",
-    endDate:"",
-  },
-  {
-    name:"",
-    degree:"",
-    startDate:"",
-    endDate:"",
-  }])
-  */
-
+  }]);
 
   useEffect(() => {
     if(resume != ""){
-      setValues({
-        name: resume.education.schools[0].name,
-        degree: resume.education.schools[0].degree,
-        startDate: resume.education.schools[0].startDate,
-        endDate: resume.education.schools[0].endDate
-      });
+      let newValues = [];
+      resume.education.schools.forEach((school) => {
+        newValues.push({
+          id: school.id,
+          name: school.name,
+          location: school.location,
+          degree: school.degree,
+          gpa: school.gpa,
+          startDate: school.startDate,
+          endDate: school.endDate
+        })
+      })
+      setValues(newValues);
     }
   }, [resume])
 
@@ -55,18 +41,30 @@ function ExperienceInput({ resume, setResume }) {
     },
     {
       id:2,
+      name:"location",
+      type:"text",
+      label:"Location"
+    },
+    {
+      id:3,
       name:"degree",
       type:"text",
       label:"Degree"
     },
     {
-      id:3,
+      id:4,
+      name:"gpa",
+      type:"text",
+      label:"GPA"
+    },
+    {
+      id:5,
       name:"startDate",
       type:"date",
       label:"Start Date"
     },
     {
-      id:4,
+      id:6,
       name:"endDate",
       type:"date",
       label:"End Date",
@@ -75,28 +73,87 @@ function ExperienceInput({ resume, setResume }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
+    setValues([{
+      id: 1,
+      name:"",
+      location:"",
+      degree:"",
+      gpa:"",
+      startDate:"",
+      endDate:"",
+    }]);
+    handleHandleSubmit({schools: values}, "education");
   }
 
-  const onChange = (e) => {
-    setValues({...values, [e.target.name]: e.target.value});
+  const onChange = (e, id) => {
+    let newValues = [];
+    values.map((school)=>newValues.push({...school}))
+    newValues.map((school) => {
+      if(school.id == id){
+        school[e.target.name] = e.target.value;
+      }
+    })
+    setValues(newValues);
   }
 
-  const addSchool = (e) => {
+  const addSchool = () => {
+    let newSchools = JSON.parse(JSON.stringify(values));
     
+    let id = 1;
+    let alreadyUsed = true;
+    while (alreadyUsed) {
+      alreadyUsed = false;
+      newSchools.forEach((school) => {
+        if (school.id === id) {
+          id++;
+          alreadyUsed = true;
+        }
+      });
+    }
+
+    newSchools.push({
+      id: id,
+      name:"",
+      location:"",
+      degree:"",
+      gpa:"",
+      startDate:"",
+      endDate:"",
+    });
+    setValues(newSchools);
+  }
+
+  const removeSchool = (id) => {
+    let newSchools = [];
+    values.forEach((school) => {
+      if(school.id != id){
+        newSchools.push(school);
+      }
+    })
+    setValues(newSchools);
+  }
+
+  const getValues = (id, input) => {
+    let school = values.find((school) => school.id == id);
+    return school[input];
   }
 
   return (
-      <Collapsable sectionTitle="Education">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2"> {/* general info form */}
+    <Collapsable sectionTitle="Education">
+    {values.map((school) => (
+      <Collapsable sectionTitle={school.name} key={school.id}>
+        <form>
           {inputs.map((input) => (
-            <Input key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
+            <Input key={input.id} {...input} value={getValues(school.id, input.name)} onChange={(e)=>onChange(e, school.id)}/>
           ))}
-          <Button text="Add School" type="button" onClick={addSchool}/>
-          <Button text="Submit" type="submit"/>
+          <Button text="Remove School" type="button" onClick={()=>removeSchool(school.id)} styling="w-full mt-2"/>
         </form>
       </Collapsable>
+    ))}
+    <div className=""><Button text="Add School" type="button" onClick={addSchool} styling="w-full mt-2"/></div>
+    <div><Button text="Submit Section" type="submit" onClick={handleSubmit} styling="w-full mt-1"/></div>
+  </Collapsable>
   )
 }
 
-export default ExperienceInput;
+export default EducationInput;

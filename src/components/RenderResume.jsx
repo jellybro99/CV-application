@@ -25,19 +25,17 @@ function EducationInfo({ resume }){
         <>
             <h2 className="text-lg font-semibold">Education</h2>
             <hr className="border-2 border-slate-400"></hr>
-            {resume.education.schools.map((school) => {
-                return (
-                    <>
-                        <div className="flex flex-row justify-between">
-                            <span>{school.name} | <span className="italic">{school.location}</span></span>
-                            <span>{school.startDate} - {school.endDate}</span>
-                        </div>
-                        <div className="list-item ml-8">
-                            {school.degree} | GPA: {school.gpa}
-                        </div>
-                    </>
-                )
-            })}
+
+            {resume.education.schools.map((school)=>(
+                <div key={school.id}>
+                    <div className="flex flex-row justify-between">
+                        <span>{school.name}
+                        {school.name != "" && <> | <span className="italic">{school.location}</span></>}</span>
+                        {school.startDate != ""&&<span>{school.startDate} - {school.endDate == "" ? "Current" : school.endDate}</span>}
+                    </div>
+                    {(school.degree != "") && <h2 className="list-item ml-6">{school.degree} | {school.gpa}</h2>}
+                </div>
+            ))}
         </>
     )
 }
@@ -55,7 +53,7 @@ function ExperienceInfo({ resume }){
                         {job.position != "" && <> | <span className="italic">{job.position}</span></>}</span>
                         {job.startDate != ""&&<span>{job.startDate} - {job.endDate == "" ? "Current" : job.endDate}</span>}
                     </div>
-                    <p>{job.responsibilites}</p>
+                    <p className="ml-4">{job.responsibilites}</p>
                 </div>
             ))}
         </>
@@ -69,7 +67,7 @@ function RenderResume({ resume }) {
     return (
         <>
             <GeneralInfo resume={resume}/>
-            {/*<EducationInfo resume={resume}/>*/}
+            <EducationInfo resume={resume}/>
             <ExperienceInfo resume={resume}/>
         </>
     )

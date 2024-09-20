@@ -4,10 +4,6 @@ import Button from "./Button";
 import Collapsable from "./Collapsable";
 
 function ExperienceInput({ resume, handleHandleSubmit }) {
-  //read from resume to find how many states
-
-  //store experience in array of job objects instead of just job object
-  //allow each job to be minimized into just the company name.
 
   const [values, setValues] = useState([{
     id: 1,
