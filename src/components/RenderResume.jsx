@@ -1,7 +1,3 @@
-const dateOptions = {
-    month: "short",
-    year: "numeric"
-}
 
 function GeneralInfo({ resume }) {
 
@@ -20,11 +16,13 @@ function GeneralInfo({ resume }) {
 }
 
 function EducationInfo({ resume }){
-    //render dates as english
+
     return (
         <>
-            <h2 className="text-lg font-semibold">Education</h2>
-            <hr className="border-2 border-slate-400"></hr>
+            {JSON.stringify(resume.education) != '{"schools":[{"id":1,"name":"","location":"","degree":"","gpa":"","startDate":"","endDate":""}]}' &&
+            <h2 className="text-lg font-semibold">Education</h2>}
+            {JSON.stringify(resume.education) != '{"schools":[{"id":1,"name":"","location":"","degree":"","gpa":"","startDate":"","endDate":""}]}' &&
+            <hr className="border-2 border-slate-400"></hr>}
 
             {resume.education.schools.map((school)=>(
                 <div key={school.id}>
@@ -41,10 +39,13 @@ function EducationInfo({ resume }){
 }
 
 function ExperienceInfo({ resume }){
+
     return (
         <>
-            <h2 className="text-lg font-semibold">Experience</h2>
-            <hr className="border-2 border-slate-400"></hr>
+            {JSON.stringify(resume.experience) != '{"jobs":[{"id":1,"company":"","position":"","startDate":"","endDate":"","responsibilites":""}]}' &&
+            <h2 className="text-lg font-semibold">Experience</h2>}
+            {JSON.stringify(resume.experience) != '{"jobs":[{"id":1,"company":"","position":"","startDate":"","endDate":"","responsibilites":""}]}' &&
+            <hr className="border-2 border-slate-400"></hr>}
 
             {resume.experience.jobs.map((job)=>(
                 <div key={job.id}>
@@ -53,16 +54,14 @@ function ExperienceInfo({ resume }){
                         {job.position != "" && <> | <span className="italic">{job.position}</span></>}</span>
                         {job.startDate != ""&&<span>{job.startDate} - {job.endDate == "" ? "Current" : job.endDate}</span>}
                     </div>
-                    <p className="ml-4">{job.responsibilites}</p>
+                    <p className="ml-4 whitespace-pre-wrap">{job.responsibilites}</p>
                 </div>
             ))}
         </>
     )
 }
 
-
 function RenderResume({ resume }) {
-    //need to make keys for each school
 
     return (
         <>

@@ -33,7 +33,7 @@ const defaultResume = {
         position: "Captain",
         startDate: "2004-08-22",
         endDate: "",
-        responsibilites:""
+        responsibilites:"- Successfully lead and command a growing pirate crew, maintaining high morale through charismatic leadership"
       },
       {
         id: 2,
@@ -41,7 +41,7 @@ const defaultResume = {
         position: "Warlord",
         startDate: "2022-08-12",
         endDate: "2022-12-18",
-        responsibilites:""
+        responsibilites:"- Skillfully manage relationships with World Government officials, projecting an image of cooperation while secretly maintaining pirate ambitions"
       }
     ]
   }
@@ -55,25 +55,24 @@ function App() {
   //const [resume, setResume] = useState(JSON.parse(localStorage.getItem("resume")));
   const [resume, setResume] = useState(defaultResume);
   const pageStyling = "flex flex-col md:flex-row gap-8 p-8 bg-slate-200 min-h-dvh";
-  const inputStyling = "inputs w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow";
+  const inputStyling = "inputs min-w-96 md:w-72 self-center border-2 p-4 rounded border-slate-400 bg-white shadow";
   const outputStyling = "flex-grow border-2 p-8 rounded border-slate-400 bg-white shadow";
   const [input, setInput] = useState("");
 
   const editInput = () => {
-    setInput(JSON.parse(JSON.stringify(resume)));    //apparently this doesn't work for Dates
+    setInput(JSON.parse(JSON.stringify(resume)));
   }
 
   const handleHandleSubmit = (values, section) => {
     let newResume = JSON.parse(JSON.stringify(resume));
     newResume[section] = values;
     setResume(newResume);
-    //ERROR BECAUSE SETTING EXPERIENCE TO ARRAY NOT JOBS.
   }
 
   return (
     <div className={pageStyling} > {/* page div */}
       <div className={inputStyling}> {/* input div */}
-        <GeneralInput resume={input} handleHandleSubmit={handleHandleSubmit}/>
+        <GeneralInput resume={input} handleHandleSubmit={handleHandleSubmit }/>
         <EducationInput resume={input} handleHandleSubmit={handleHandleSubmit}/>
         <ExperienceInput resume={input} handleHandleSubmit={handleHandleSubmit}/>
         <div className='mx-1.5' onClick={editInput}><Button text="Edit" styling="w-full mt-1"/></div>

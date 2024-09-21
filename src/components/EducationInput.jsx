@@ -142,7 +142,7 @@ function EducationInput({ resume, handleHandleSubmit }) {
     <Collapsable sectionTitle="Education">
     {values.map((school) => (
       <Collapsable sectionTitle={school.name} key={school.id}>
-        <form>
+        <form className="flex flex-col gap-2">
           {inputs.map((input) => (
             <Input key={input.id} {...input} value={getValues(school.id, input.name)} onChange={(e)=>onChange(e, school.id)}/>
           ))}

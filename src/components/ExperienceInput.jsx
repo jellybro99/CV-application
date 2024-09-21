@@ -60,7 +60,8 @@ function ExperienceInput({ resume, handleHandleSubmit }) {
       id:5,
       name:"responsibilites",
       type:"text",
-      label:"Responsibilites"
+      label:"Responsibilites",
+      textArea: true
     }
   ]
 
@@ -134,7 +135,7 @@ function ExperienceInput({ resume, handleHandleSubmit }) {
       <Collapsable sectionTitle="Experience">
         {values.map((job) => (
           <Collapsable sectionTitle={job.company} key={job.id}>
-            <form>
+            <form className="flex flex-col gap-2">
               {inputs.map((input) => (
                 <Input key={input.id} {...input} value={getValues(job.id, input.name)} onChange={(e)=>onChange(e, job.id)}/>
               ))}
